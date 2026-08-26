@@ -1,0 +1,12 @@
+The socat database tunnel is available through the in-cluster Service:
+
+  {{ include "socat-tunneler.fullname" . }}:{{ .Values.service.port }}
+
+It forwards TCP connections to:
+
+  {{ .Values.dbhost }}:{{ .Values.dbport }}
+
+Configure clients to use the Service hostname and port above. Check the
+Deployment with:
+
+  kubectl get pods -l app.kubernetes.io/instance={{ .Release.Name }}
