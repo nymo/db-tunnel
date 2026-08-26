@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "socat-tunneler.fullname" . }}
+  labels:
+    {{- include "socat-tunneler.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - name: tunnel
+      port: {{ .Values.service.port }}
+      targetPort: tunnel
+      protocol: TCP
+  selector:
+    {{- include "socat-tunneler.selectorLabels" . | nindent 4 }}
